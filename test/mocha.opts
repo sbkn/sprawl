@@ -1,0 +1,5 @@
+--require babel-core/register
+--reporter spec
+--reporter-options output=doc/xunit.xml
+--timeout 5000
+--recursive

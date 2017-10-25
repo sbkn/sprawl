@@ -1,0 +1,22 @@
+[
+  {
+	"Effect": "Allow",
+	"Action": [
+	  "dynamodb:Query",
+	  "dynamodb:GetItem",
+	  "dynamodb:PutItem",
+	  "dynamodb:UpdateItem"
+	],
+	"Resource": "arn:aws:dynamodb:${opt:region, self:provider.region}:*:table/${self:provider.environment.TABLE}"
+  },
+  {
+	"Effect": "Allow",
+	"Action": [
+	  "s3:*"
+	],
+	"Resource": [
+	  "arn:aws:s3:::${self:provider.environment.BUCKET}",
+	  "arn:aws:s3:::${self:provider.environment.BUCKET}/*"
+	]
+  }
+]

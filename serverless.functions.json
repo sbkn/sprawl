@@ -1,0 +1,11 @@
+{
+  "get": {
+	"handler": "get.index",
+	"description": "get hint",
+	"events": [
+	  {
+		"schedule": "cron(*/30 6-23 * * *)"
+	  }
+	]
+  }
+}

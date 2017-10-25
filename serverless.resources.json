@@ -1,0 +1,43 @@
+{
+  "DynamoDbTable": {
+	"Type": "AWS::DynamoDB::Table",
+	"DeletionPolicy": "Delete",
+	"Properties": {
+	  "AttributeDefinitions": [
+		{
+		  "AttributeName": "ID",
+		  "AttributeType": "S"
+		}
+	  ],
+	  "KeySchema": [
+		{
+		  "AttributeName": "ID",
+		  "KeyType": "HASH"
+		}
+	  ],
+	  "ProvisionedThroughput": {
+		"ReadCapacityUnits": 1,
+		"WriteCapacityUnits": 1
+	  },
+	  "TableName": "${self:provider.environment.TABLE}"
+	}
+  },
+  "S3": {
+	"Type": "AWS::S3::Bucket",
+	"DeletionPolicy": "Delete",
+	"Properties": {
+	  "BucketName": "${self:provider.environment.BUCKET}",
+	  "LifecycleConfiguration": {
+		"Rules": [
+		  {
+			"ExpirationInDays": 7,
+			"Status": "Enabled"
+		  }
+		]
+	  },
+	  "VersioningConfiguration": {
+		"Status": "Enabled"
+	  }
+	}
+  }
+}

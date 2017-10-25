@@ -1,0 +1,31 @@
+{
+  "service": "Sprawl",
+  "frameworkVersion": ">=1.19.0",
+  "plugins": [
+    "serverless-webpack",
+    "serverless-aws-alias"
+  ],
+  "provider": {
+    "name": "aws",
+    "profile": "",
+    "runtime": "nodejs6.10",
+    "memory": 128,
+    "timeout": 15,
+    "stage": "${opt:stage}",
+    "region": "eu-central-1",
+    "environment": {
+      "ENV": "${self:provider.stage}",
+      "TABLE": "${self:service}_${self:provider.stage}",
+      "BUCKET": "quotes-${self:provider.region}-${self:provider.stage}",
+      "WEBHOOK_SLACK": "https://d37nos5tldtoes.cloudfront.net"
+    },
+    "iamRoleStatements": "${file(serverless.iamRoleStatements.json)}"
+  },
+  "custom": {
+    "webpackIncludeModules": true
+  },
+  "functions": "${file(serverless.functions.json)}",
+  "resources": {
+    "Resources": "${file(serverless.resources.json)}"
+  }
+}
